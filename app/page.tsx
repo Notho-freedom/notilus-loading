@@ -2,6 +2,8 @@ import { HeroSection } from "@/components/hero-section"
 import { FeaturesSection } from "@/components/features-section"
 import { BrowserShowcase } from "@/components/browser-showcase"
 import { DevToolsSection } from "@/components/dev-tools-section"
+import { AIAssistantSection } from "@/components/ai-assistant-section"
+import { LighthouseSection } from "@/components/lighthouse-section"
 import { PerformanceSection } from "@/components/performance-section"
 import { DownloadSection } from "@/components/download-section"
 import { Footer } from "@/components/footer"
@@ -15,6 +17,8 @@ export default function Home() {
       <FeaturesSection />
       <BrowserShowcase />
       <DevToolsSection />
+      <AIAssistantSection />
+      <LighthouseSection />
       <PerformanceSection />
       <DownloadSection />
       <Footer />

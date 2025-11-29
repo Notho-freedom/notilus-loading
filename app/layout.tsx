@@ -1,16 +1,24 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Orbitron, Rajdhani } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  variable: "--font-orbitron",
+  weight: ["400", "500", "600", "700", "800", "900"],
+})
+const rajdhani = Rajdhani({
+  subsets: ["latin"],
+  variable: "--font-rajdhani",
+  weight: ["300", "400", "500", "600", "700"],
+})
 
 export const metadata: Metadata = {
   title: "Notilus Browser - The Developer Browser",
   description:
-    "Built for developers who demand more. System monitoring, integrated dev tools, and performance optimization — all in one powerful browser.",
+    "Built for developers who demand more. System monitoring, integrated dev tools, AI assistant, and performance optimization — all in one powerful browser.",
   generator: "Notilus",
   icons: {
     icon: [
@@ -28,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`font-sans antialiased`}>
+      <body className={`${orbitron.variable} ${rajdhani.variable} font-sans antialiased`}>
         {children}
         <Analytics />
       </body>
