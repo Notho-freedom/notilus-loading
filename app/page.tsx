@@ -6,13 +6,12 @@ import { AIAssistantSection } from "@/components/ai-assistant-section"
 import { LighthouseSection } from "@/components/lighthouse-section"
 import { PerformanceSection } from "@/components/performance-section"
 import { DownloadSection } from "@/components/download-section"
-import { Footer } from "@/components/footer"
-import { Navbar } from "@/components/navbar"
+import { TestimonialsSection } from "@/components/testimonials-section"
+import { ComparisonSection } from "@/components/comparison-section"
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      <Navbar />
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <HeroSection />
       <FeaturesSection />
       <BrowserShowcase />
@@ -20,8 +19,9 @@ export default function Home() {
       <AIAssistantSection />
       <LighthouseSection />
       <PerformanceSection />
+      <ComparisonSection />
+      <TestimonialsSection />
       <DownloadSection />
-      <Footer />
-    </main>
+    </div>
   )
 }

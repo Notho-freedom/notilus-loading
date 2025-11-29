@@ -2,6 +2,8 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Orbitron, Rajdhani } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { Navbar } from "@/components/navbar"
+import { Footer } from "@/components/footer"
 import "./globals.css"
 
 const orbitron = Orbitron({
@@ -23,7 +25,7 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/images/l2-removebg-preview-20-282-29.png",
+        url: "/images/notilus-logo.png",
       },
     ],
   },
@@ -36,8 +38,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${orbitron.variable} ${rajdhani.variable} font-sans antialiased`}>
-        {children}
+      <body className={`${orbitron.variable} ${rajdhani.variable} font-sans antialiased bg-[#09080D]`}>
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
         <Analytics />
       </body>
     </html>
