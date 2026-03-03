@@ -22,20 +22,23 @@ const platforms = [
     id: "windows",
     name: "Windows",
     icon: Monitor,
+    available: true,
     versions: [
-      { name: "Windows 11", size: "145 MB", recommended: true },
-      { name: "Windows 10", size: "145 MB", recommended: false },
+      { name: "Windows 11", size: "102 MB", recommended: true },
+      { name: "Windows 10", size: "102 MB", recommended: false },
     ],
     requirements: ["Windows 10 or later", "64-bit processor", "4 GB RAM minimum", "1 GB available storage"],
+    downloadUrl: "/download/Notilus-Browser-Setup-1.0.0.exe",
   },
   {
     id: "macos",
     name: "macOS",
     icon: Apple,
+    available: false,
     versions: [
-      { name: "macOS 14 Sonoma", size: "142 MB", recommended: true },
-      { name: "macOS 13 Ventura", size: "142 MB", recommended: false },
-      { name: "macOS 12 Monterey", size: "142 MB", recommended: false },
+      { name: "macOS 14 Sonoma", size: "TBD", recommended: true },
+      { name: "macOS 13 Ventura", size: "TBD", recommended: false },
+      { name: "macOS 12 Monterey", size: "TBD", recommended: false },
     ],
     requirements: ["macOS 12 or later", "Apple Silicon or Intel", "4 GB RAM minimum", "1 GB available storage"],
   },
@@ -43,10 +46,11 @@ const platforms = [
     id: "linux",
     name: "Linux",
     icon: Terminal,
+    available: false,
     versions: [
-      { name: ".deb (Ubuntu/Debian)", size: "138 MB", recommended: true },
-      { name: ".rpm (Fedora/RHEL)", size: "138 MB", recommended: false },
-      { name: ".tar.gz (Generic)", size: "140 MB", recommended: false },
+      { name: ".deb (Ubuntu/Debian)", size: "TBD", recommended: true },
+      { name: ".rpm (Fedora/RHEL)", size: "TBD", recommended: false },
+      { name: ".tar.gz (Generic)", size: "TBD", recommended: false },
     ],
     requirements: ["Ubuntu 20.04+ or equivalent", "64-bit processor", "4 GB RAM minimum", "1 GB available storage"],
   },
@@ -92,19 +96,25 @@ export default function DownloadPage() {
       <section className="py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Platform selector */}
-          <div className="flex justify-center gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mb-12">
             {platforms.map((p) => (
               <button
                 key={p.id}
-                onClick={() => setSelectedPlatform(p.id)}
-                className={`flex items-center gap-3 px-6 py-4 rounded-xl border transition-all ${
+                onClick={() => p.available && setSelectedPlatform(p.id)}
+                disabled={!p.available}
+                className={`flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 rounded-xl border transition-all w-full sm:w-auto ${
                   selectedPlatform === p.id
                     ? "bg-[#FF2D55]/20 border-[#FF2D55] text-white"
-                    : "bg-white/5 border-white/10 text-white/60 hover:border-white/30"
+                    : p.available
+                    ? "bg-white/5 border-white/10 text-white/60 hover:border-white/30"
+                    : "bg-white/5 border-white/5 text-white/30 cursor-not-allowed opacity-50"
                 }`}
               >
-                <p.icon className="w-6 h-6" />
-                <span className="font-medium">{p.name}</span>
+                <p.icon className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" />
+                <span className="font-medium text-sm sm:text-base">{p.name}</span>
+                {!p.available && (
+                  <span className="ml-auto sm:ml-2 text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-white/50 flex-shrink-0">Bientôt</span>
+                )}
               </button>
             ))}
           </div>
@@ -130,7 +140,12 @@ export default function DownloadPage() {
                   <div className="mb-6">
                     <label className="block text-sm text-white/60 mb-2">Select Version</label>
                     <div className="relative">
-                      <select className="w-full p-4 rounded-xl bg-white/5 border border-white/10 text-white appearance-none cursor-pointer focus:outline-none focus:border-[#FF2D55]/50">
+                      <select
+                        disabled={!platform.available}
+                        className={`w-full p-4 rounded-xl bg-white/5 border border-white/10 text-white appearance-none focus:outline-none focus:border-[#FF2D55]/50 ${
+                          platform.available ? "cursor-pointer" : "cursor-not-allowed opacity-50"
+                        }`}
+                      >
                         {platform.versions.map((v) => (
                           <option key={v.name} value={v.name}>
                             {v.name} ({v.size}) {v.recommended ? "- Recommended" : ""}
@@ -141,13 +156,27 @@ export default function DownloadPage() {
                     </div>
                   </div>
 
-                  <Button
-                    size="lg"
-                    className="w-full bg-gradient-to-r from-[#FF2D55] to-[#FF2D92] text-white py-6 text-lg font-semibold rounded-xl hover:shadow-lg hover:shadow-[#FF2D55]/30 transition-shadow"
-                  >
-                    <Download className="w-5 h-5 mr-2" />
-                    Download for {platform.name}
-                  </Button>
+                  {platform.available ? (
+                    <Button
+                      size="lg"
+                      asChild
+                      className="w-full bg-gradient-to-r from-[#FF2D55] to-[#FF2D92] text-white py-6 text-lg font-semibold rounded-xl hover:shadow-lg hover:shadow-[#FF2D55]/30 transition-shadow"
+                    >
+                      <a href={platform.downloadUrl} download>
+                        <Download className="w-5 h-5 mr-2" />
+                        Download for {platform.name}
+                      </a>
+                    </Button>
+                  ) : (
+                    <Button
+                      size="lg"
+                      disabled
+                      className="w-full bg-white/5 border border-white/10 text-white/40 py-6 text-lg font-semibold rounded-xl cursor-not-allowed opacity-60"
+                    >
+                      <Download className="w-5 h-5 mr-2" />
+                      Bientôt disponible
+                    </Button>
+                  )}
 
                   <p className="text-center text-sm text-white/40 mt-4">
                     By downloading, you agree to our Terms of Service and Privacy Policy

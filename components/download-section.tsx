@@ -1,12 +1,12 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Download, Apple, Monitor } from "lucide-react"
+import { Download, Monitor, Apple } from "lucide-react"
 
 const platforms = [
-  { icon: Monitor, name: "Windows", version: "10/11 64-bit", primary: true },
-  { icon: Apple, name: "macOS", version: "12+ (Intel/ARM)", primary: false },
-  { icon: Monitor, name: "Linux", version: "Ubuntu/Debian", primary: false },
+  { icon: Monitor, name: "Windows", version: "10/11 64-bit", available: true, downloadUrl: "/download/Notilus-Browser-Setup-1.0.0.exe" },
+  { icon: Apple, name: "macOS", version: "12+ (Intel/ARM)", available: false },
+  { icon: Monitor, name: "Linux", version: "Ubuntu/Debian", available: false },
 ]
 
 export function DownloadSection() {
@@ -59,23 +59,38 @@ export function DownloadSection() {
         </p>
 
         {/* Download buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 mb-12 max-w-2xl mx-auto">
           {platforms.map((platform) => (
-            <Button
-              key={platform.name}
-              size="lg"
-              className={`w-full sm:w-auto px-8 py-6 rounded-xl ${
-                platform.primary
-                  ? "bg-gradient-to-r from-[#FF2D55] to-[#FF2D92] hover:opacity-90 text-white neon-glow"
-                  : "glass border border-[#FF2D55]/30 hover:border-[#FF2D55]/60 text-white"
-              }`}
-            >
-              <platform.icon className="w-5 h-5 mr-3" />
-              <div className="text-left">
-                <div className="font-semibold">{platform.name}</div>
-                <div className="text-xs opacity-70">{platform.version}</div>
-              </div>
-            </Button>
+            <div key={platform.name} className="relative w-full sm:w-auto sm:flex-1 sm:max-w-[200px]">
+              {platform.available ? (
+                <Button
+                  size="lg"
+                  asChild
+                  className="w-full px-6 sm:px-8 py-5 sm:py-6 rounded-xl bg-gradient-to-r from-[#FF2D55] to-[#FF2D92] hover:opacity-90 text-white neon-glow flex items-center justify-center sm:justify-start"
+                >
+                  <a href={platform.downloadUrl} download className="flex items-center justify-center sm:justify-start w-full">
+                    <platform.icon className="w-5 h-5 mr-3 flex-shrink-0" />
+                    <div className="text-center sm:text-left">
+                      <div className="font-semibold">{platform.name}</div>
+                      <div className="text-xs opacity-70">{platform.version}</div>
+                    </div>
+                  </a>
+                </Button>
+              ) : (
+                <Button
+                  size="lg"
+                  disabled
+                  className="w-full px-6 sm:px-8 py-5 sm:py-6 rounded-xl glass border border-white/10 text-white/40 cursor-not-allowed opacity-60 flex items-center justify-center sm:justify-start"
+                >
+                  <platform.icon className="w-5 h-5 mr-3 flex-shrink-0" />
+                  <div className="text-center sm:text-left flex-1">
+                    <div className="font-semibold">{platform.name}</div>
+                    <div className="text-xs opacity-70">{platform.version}</div>
+                  </div>
+                  <span className="ml-2 text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-white/50 flex-shrink-0">Bientôt</span>
+                </Button>
+              )}
+            </div>
           ))}
         </div>
 
