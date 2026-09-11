@@ -1,30 +1,51 @@
-# SaaS landing page
+# Notilus Loading
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+[![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)](https://nextjs.org/) [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/) [![Vercel Analytics](https://img.shields.io/badge/Vercel_Analytics-enabled-black?logo=vercel&logoColor=white)](https://vercel.com/analytics)
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/ravels-projects-13eaae80/v0-saa-s-landing-page)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/m1Fyru5vJrx)
+A Next.js web project focused on a loading/landing experience, with a modern React UI and Tailwind CSS styling.
 
-## Overview
+## Stack
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+- Next.js 16
+- React 19
+- Tailwind CSS 4
+- Radix UI primitives
+- Recharts
+- React Hook Form + Zod
+- Vercel Analytics
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+Production build:
+
+```bash
+npm run build
+npm start
+```
+
+Lint:
+
+```bash
+npm run lint
+```
 
 ## Deployment
 
-Your project is live at:
+The project includes a deployment script for the existing hosting workflow:
 
-**[https://vercel.com/ravels-projects-13eaae80/v0-saa-s-landing-page](https://vercel.com/ravels-projects-13eaae80/v0-saa-s-landing-page)**
+```bash
+npm run deploy
+```
 
-## Build your app
+## Status
 
-Continue building your app on:
+Active web project. The repository was originally synchronized from a v0 workflow; this README documents the current codebase rather than the generated template description.
 
-**[https://v0.app/chat/m1Fyru5vJrx](https://v0.app/chat/m1Fyru5vJrx)**
+## Author
 
-## How It Works
-
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+**Ravel Momo** — [@Notho-freedom](https://github.com/Notho-freedom)
